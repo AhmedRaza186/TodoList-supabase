@@ -13,6 +13,7 @@ let todoList = document.querySelector('#todoList')
 
 addBtn.addEventListener('click', addTodo)
 async function addTodo() {
+
     let inputValue = userInput.value
     if (inputValue.trim() === '') return;
     const { error } = await supabaseClient
@@ -33,7 +34,7 @@ document.body.addEventListener('click', async (el) => {
     if (el.target.id === 'checkBtn') {
         console.log(el.target.id)
         const li = el.target.parentElement.parentElement;
-        let checkState =  li.classList.contains('completed')
+        let checkState = li.classList.contains('completed')
 
         console.log(li.classList.contains('completed'));
 
@@ -41,19 +42,26 @@ document.body.addEventListener('click', async (el) => {
             .from('todo')
             .update({ isCompleted: checkState })
             .eq('id', li.id)
-        console.log(error);
+        console.log(error)
 
         fetchTasks()
     }
+
     if (el.target.id === 'editBtn') {
         console.log(el.target.id)
         const li = el.target.parentElement.parentElement;
         const span = li.querySelector('span');
-li.classList.toggle('completed')
+
         const updatedText = prompt('Edit your task:', span.innerText);
 
         if (updatedText !== null && updatedText.trim() !== '') {
             span.innerText = updatedText;
+            const { error } = await supabaseClient
+                .from('todo')
+                .update({ list: updatedText })
+                .eq('id', li.id)
+            console.log(error);
+            fetchTasks()
         }
     }
 
@@ -66,7 +74,7 @@ li.classList.toggle('completed')
         fetchTasks()
     }
 
-    // console.log(el.parentElement);
+
 })
 
 
@@ -80,7 +88,7 @@ async function fetchTasks() {
     todoList.innerHTML = ''
     tasks.forEach(el => {
         const li = document.createElement('li');
-        el.isCompleted?li.classList.add('completed'):li.classList.remove('completed')
+        el.isCompleted ? li.classList.add('completed') : li.classList.remove('completed')
         li.id = el.id
         li.innerHTML = `
         <span >${el.list}</span>
