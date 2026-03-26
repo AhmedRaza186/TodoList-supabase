@@ -4,7 +4,7 @@ let supabaseUrl = 'https://xuyftnjfzjriqjorjnuv.supabase.co'
 let supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1eWZ0bmpmempyaXFqb3JqbnV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MzExNjEsImV4cCI6MjA4NzAwNzE2MX0.2XZ7jTmPuMBgqJqaxLWEYIfNwg9XYU609oKGw-Jv4q4'
 // Create a single supabase client for interacting with your database
 const supabaseClient = createClient(supabaseUrl, supabaseKey)
-
+fetchTasks()
 
 let userInput = document.querySelector('#todoInput')
 let addBtn = document.querySelector('#add-btn')
