@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.app {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Input section */
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+#todoInput {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+
+#todoInput:focus {
+  border-color: #667eea;
+}
+
+/* Add button */
+#add-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#add-btn:hover {
+  background: #5a67d8;
+}
+
+/* List */
+#todoList {
+  list-style: none;
+  margin-top: 20px;
+}
+
+/* Each task */
+#todoList li {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+#todoList li:hover {
+  transform: scale(1.02);
+}
+
+/* Completed task */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Buttons */
+.actions button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Individual button styles */
+#checkBtn {
+  background: #48bb78;
+  color: white;
+}
+
+#checkBtn:hover {
+  background: #38a169;
+}
+
+#editBtn {
+  background: #ed8936;
+  color: white;
+}
+
+#editBtn:hover {
+  background: #dd6b20;
+}
+
+#deleteBtn {
+  background: #f56565;
+  color: white;
+}
+
+#deleteBtn:hover {
+  background: #e53e3e;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .app {
+    padding: 15px;
+  }
+
+  #todoInput {
+    font-size: 14px;
+  }
+}
