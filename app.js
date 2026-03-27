@@ -8,14 +8,13 @@ fetchTasks()
 
 let userInput = document.querySelector('#todoInput')
 let addBtn = document.querySelector('#add-btn')
-console.log(addBtn)
 let todoList = document.querySelector('#todoList')
 
 addBtn.addEventListener('click', addTodo)
 async function addTodo() {
 
     let inputValue = userInput.value
-    if (inputValue.trim() === '') return;
+    if (inputValue.trim() === '') return
     const { error } = await supabaseClient
         .from('todo')
         .insert({
@@ -25,48 +24,44 @@ async function addTodo() {
     userInput.value = ''
     console.log(error)
     fetchTasks()
-
-
 }
 
 document.body.addEventListener('click', async (el) => {
-    console.log(el)
     if (el.target.id === 'checkBtn') {
         console.log(el.target.id)
-        const li = el.target.parentElement.parentElement;
-        let checkState = li.classList.contains('completed')
+        const li = el.target.parentElement.parentElement
+        let checkState = !li.classList.contains('completed')
 
-        console.log(li.classList.contains('completed'));
+        console.log(li.classList.contains('completed'))
 
         const { error } = await supabaseClient
             .from('todo')
             .update({ isCompleted: checkState })
             .eq('id', li.id)
-        console.log(error)
 
         fetchTasks()
     }
 
     if (el.target.id === 'editBtn') {
         console.log(el.target.id)
-        const li = el.target.parentElement.parentElement;
-        const span = li.querySelector('span');
+        const li = el.target.parentElement.parentElement
+        const span = li.querySelector('span')
 
-        const updatedText = prompt('Edit your task:', span.innerText);
+        const updatedText = prompt('Edit your task:', span.innerText)
 
         if (updatedText !== null && updatedText.trim() !== '') {
-            span.innerText = updatedText;
+            span.innerText = updatedText
             const { error } = await supabaseClient
                 .from('todo')
                 .update({ list: updatedText })
                 .eq('id', li.id)
-            console.log(error);
+            
             fetchTasks()
         }
     }
 
     if (el.target.id === 'deleteBtn') {
-        console.log(el.target.id)
+        
         const response = await supabaseClient
             .from('todo')
             .delete()
@@ -79,15 +74,15 @@ document.body.addEventListener('click', async (el) => {
 
 
 async function fetchTasks() {
-
     const { data, error } = await supabaseClient
         .from('todo')
         .select()
+
     let tasks = data || []
-    console.log(tasks);
+    
     todoList.innerHTML = ''
     tasks.forEach(el => {
-        const li = document.createElement('li');
+        const li = document.createElement('li')
         el.isCompleted ? li.classList.add('completed') : li.classList.remove('completed')
         li.id = el.id
         li.innerHTML = `
@@ -98,5 +93,5 @@ async function fetchTasks() {
           <button id='deleteBtn'>X</button>
         </div>`
         todoList.appendChild(li)
-    });
+    })
 }
